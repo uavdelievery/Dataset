@@ -154,7 +154,7 @@ def loadSimulation():
 
 
 ### Body of the file
-dataFrame=pd.read_csv("C:\\Users\\Bhumika\\Documents\\restdata.csv") # your file folder
+dataFrame=pd.read_csv("C:\\Users\\XYZ\\Documents\\restdata.csv") # your file folder
 #print(dataFrame["Distance_mts"])
 shortDf = dataFrame.drop(dataFrame[dataFrame["Distance_mts"] > 5000].index) # Drop all row too distance for a UAV
 #print(shortDf)
