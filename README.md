@@ -21,7 +21,7 @@ Each folder futher comprised of 5 log files, containing data of UAV in different
 |lat|Lattitude|deg|
 |lon|Longitude|deg|
 |alt|Altitude|m|
-|distflown|Distane flown|m|
+|distflown|Distance flown|m|
 |temp|Air temperature|K|
 |trk|Track angle|deg|
 |hgd|Heading direction|deg|
