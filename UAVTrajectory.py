@@ -121,13 +121,23 @@ def findDirection(latA,lonA,latB,lonB):
     bearing = np.arctan2(X, Y)
     return 360 - ((np.degrees(bearing) + 360) % 360)
 
-### Find initial direction for an UAV
-def findDirection1(latA,lonA,latB,lonB):
-    X = np.abs(lonA - lonB)
+### Updated f ind initial direction for an UAV
+def findDirection2(ID,latA,lonA,latB,lonB):
+    dL =np.deg2rad(lonB) - np.deg2rad(lonA)
+    X = np.cos(np.deg2rad(latB)) * np.sin(dL)
+    Y = np.cos(np.deg2rad(latA)) * np.sin(np.deg2rad(latB)) - np.sin(np.deg2rad(latA)) * np.cos(np.deg2rad(latB)) * np.cos(dL)
+    course = np.arctan2(X, Y)
+    #course_deg=360-((np.degrees(course) + 360) % 360)
+    course_deg=np.degrees(course)
 
-    Y = np.log(np.tan(latB/2 + np.pi/4)/np.tan(latA/2+np.pi/4))
-    bearing = np.arctan2(X, Y)
-    return 360 - ((np.degrees(bearing) + 360) % 360)
+    wind=myWindDir+180
+    gs = UAVspeed + (myWindSpd * np.cos(np.deg2rad(wind) - np.deg2rad(course_deg)))
+    wca = -np.arcsin( (myWindSpd * np.sin(np.deg2rad(wind) - np.deg2rad(course_deg)))/UAVspeed)
+    wca_deg = np.rad2deg(wca)
+    hdg_deg = course_deg+wca_deg
+
+    print("ID=", ID,"latA=",latA,"lonA=",lonA,"latB=",latB,"lonB=",lonB,"groudSpeed=",gs, "course=", course_deg, "wca=",wca_deg, "  hdg=",hdg_deg)
+    return hdg_deg
 
 
 def loadSimulation():
@@ -136,7 +146,7 @@ def loadSimulation():
     stack.stack("HOLD")
     for row in shortDf.itertuples():
         trajectory=newTrajectory(row.Latitude,row.Longitude,row.ClientLatitude,row.ClientLongitude)
-        hdg=findDirection(row.Latitude,row.Longitude,row.ClientLatitude,row.ClientLongitude)
+        hdg=findDirection2(row.Latitude,row.Longitude,row.ClientLatitude,row.ClientLongitude)
         #hdg = 90.67
         strFlight=strFormatter(row.Index,UAVtype, hdg, UAVAlt, UAVspeed, trajectory) # 30 knots= 15,43 m/s -- 38,8769knots= 20 m/s
         stack.stack(strFlight)
