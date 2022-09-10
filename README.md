@@ -31,3 +31,19 @@ Each folder futher comprised of 5 log files, containing data of UAV in different
 
 ***
 ### BlueSky Simulator [link](https://github.com/TUDelft-CNS-ATM/bluesky)
+
+
+
+### Citation
+
+```
+@inproceedings{rigoni2022delivery,
+  title={Delivery with UAVs: a simulated dataset via ATS},
+  author={Rigoni, Giulio and Pinotti, Cristina M and Bhumika and Das, Debasis and Das, Sajal K},
+  booktitle={2022 IEEE 95th Vehicular Technology Conference:(VTC2022-Spring)},
+  pages={1--6},
+  year={2022},
+  organization={IEEE}
+}
+```
+
